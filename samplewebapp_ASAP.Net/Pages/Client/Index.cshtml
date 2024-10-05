@@ -1,0 +1,54 @@
+﻿@page
+@model samplewebapp_ASAP.Net.Pages.Client.IndexModel
+@{
+}
+
+<a href="/client/create" class="btn btn-primary">Create</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>First Name</th>
+            <th>Last Name</th>
+            <th>Designation</th>
+            <th>Date of Join</th>
+            <th>Salary</th>
+            <th>Gender</th>
+            <th>State</th>
+            <th colspan="2">Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{
+            foreach (var item in Model.listUsers)
+            {
+                                            <tr>
+                                                <td>@item.Id</td>
+                                                <td>@item.FirstName</td>
+                                                <td>@item.LastName</td>
+                                                <td>@item.Designation</td>
+                                                <td>@item.DateOfJoin.ToString("dd/MM/yyyy")</td>
+                                                <td>@item.Salary</td>
+                                                <td>@item.Gender</td>
+                                                <td>@item.State</td>
+                                                <td>
+                                                <a class="btn btn-primary btn-sm" href="/Client/Edit?id=@item.Id">Edit</a>&nbsp;
+                                                <a class="btn btn-danger btn-sm" onclick="onDelete(@item.Id)">Delete</a>&nbsp;
+
+                                                </td>
+                                            </tr>
+            }
+
+        }
+    </tbody>
+</table>
+
+<script>
+    function onDelete(id){
+        if(window.confirm("Are you sure to delete this item?"))
+        {
+            window.location.href = "/Client/Delete?id=" + id;
+        }
+    }
+</script>

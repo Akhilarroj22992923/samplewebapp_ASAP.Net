@@ -1,0 +1,90 @@
+﻿@page
+@model samplewebapp_ASAP.Net.Pages.Client.EditModel
+@{
+}
+﻿
+<h2>Edit Client</h2>
+
+@if (Model.errorMessage.Length > 0)
+{
+    <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <strong>@Model.errorMessage</strong>
+        <button type='button' class="btn-close" data-bs-dismiss='alert' aria-label="close"></button>
+    </div>
+}
+
+<form method="POST">
+    <input type="hidden" name="id" value="@Model.user.Id" />
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">First Name</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="firstName" value="@Model.user.FirstName" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Last Name</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="lastName" value="@Model.user.LastName" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Designation</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="designation" value="@Model.user.Designation" />
+        </div>
+    </div>
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Date of Join</label>
+        <div class="col-sm-6">
+            <input type="text" class="form-control" name="dateofjoin" value="@Model.user.DateOfJoin.ToString("dd/MM/yyyy")" placeholder="dd/MM/yyyy" />
+        </div>
+    </div>
+
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Salary</label>
+        <div class="col-sm-6">
+            <input type="number" class="form-control" name="salary" step="0.01" value="@Model.user.Salary" />
+        </div>
+    </div>
+    <!-- Gender Radio Buttons -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">Gender</label>
+        <div class="col-sm-6">
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="gender" value="Male" id="genderMale" @(Model.user.Gender == "Male" ? "checked" : "") />
+                <label class="form-check-label" for="genderMale">Male</label>
+            </div>
+            <div class="form-check">
+                <input type="radio" class="form-check-input" name="gender" value="Female" id="genderFemale" @(Model.user.Gender == "Female" ? "checked" : "") />
+                <label class="form-check-label" for="genderFemale">Female</label>
+            </div>
+        </div>
+    </div>
+    <!-- State Dropdown List -->
+    <div class="row mb-3">
+        <label class="col-sm-3 col-form-label">State</label>
+        <div class="col-sm-6">
+            <select class="form-select" name="state">
+                <option value="">Select a state</option>
+                @foreach (var state in Model.States)
+                {
+                    <option value="@state" selected="@(state == Model.user.State ? "selected" : null)">@state</option>
+                }
+            </select>
+        </div>
+    </div>
+    @if (Model.successMessage.Length > 0)
+    {
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <strong>@Model.successMessage</strong>
+            <button type='button' class="btn-close" data-bs-dismiss='alert' aria-label="close"></button>
+        </div>
+    }
+    <div class="row mb-3">
+        <div class="offset-sm-3 col-sm-3 g-grid">
+            <button type="submit" class="btn btn-primary">Submit</button>
+            &nbsp;
+            <button type="submit" class="btn btn-danger">Cancel</button>
+        </div>
+    </div>
+</form>
